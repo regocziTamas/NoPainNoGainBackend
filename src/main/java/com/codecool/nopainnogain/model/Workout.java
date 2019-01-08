@@ -22,6 +22,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Workout{
     private String title;
+    @Lob
     @Convert(converter = WorkoutBlockConverter.class)
     private List<WorkoutBlock> blocks = new ArrayList<>();
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +41,14 @@ public class Workout{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Long getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Long lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     public void addBlock(WorkoutBlock block){

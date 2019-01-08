@@ -1,22 +1,25 @@
 package com.codecool.nopainnogain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import java.io.IOException;
 
 @Entity(name = "exercise")
 public class Exercise{
 
     private String name;
+    @Lob
     private String description;
     @Enumerated(value = EnumType.STRING)
     private ExerciseTarget target;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonIgnore
+    private Long lastUpdated;
 
     private static ObjectMapper objectMapper = new ObjectMapper().enableDefaultTyping();
 
@@ -58,6 +61,14 @@ public class Exercise{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Long lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     @Override
