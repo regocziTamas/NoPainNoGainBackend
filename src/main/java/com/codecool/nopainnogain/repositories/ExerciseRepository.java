@@ -13,7 +13,12 @@ public interface ExerciseRepository extends JpaRepository<Exercise,Long> {
     @Transactional
     public Exercise getById(Long id);
 
-    @Query("SELECT ex FROM Exercise ex WHERE ex.lastUpdated > :timestamp")
+    @Query("SELECT ex FROM exercise ex WHERE ex.lastUpdated > :timestamp")
     public List<Exercise> getAllUpdatedExercisesSince(@Param("timestamp") Long timestamp);
+
+    @Transactional
+    public void deleteById(Long id);
+
+
 
 }

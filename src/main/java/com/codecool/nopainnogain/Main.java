@@ -1,7 +1,6 @@
 package com.codecool.nopainnogain;
 
 import com.codecool.nopainnogain.model.*;
-import com.codecool.nopainnogain.repositories.ExerciseRepository;
 import com.codecool.nopainnogain.repositories.ExerciseRepositorySynced;
 import com.codecool.nopainnogain.repositories.WorkoutRepositorySynced;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +44,9 @@ public class Main {
 
             List<Exercise> allExercises = exerciseRepository.getAllExercises();
 
-            WorkoutExercise wex1 = new WorkoutExercise(10,allExercises.get(4));
-            WorkoutExercise wex2 = new WorkoutExercise(10,allExercises.get(5));
-            WorkoutExercise wex3 = new WorkoutExercise(10,allExercises.get(6));
+            WorkoutExercise wex1 = new WorkoutExercise(10,allExercises.get(1));
+            WorkoutExercise wex2 = new WorkoutExercise(10,allExercises.get(3));
+            WorkoutExercise wex3 = new WorkoutExercise(10,allExercises.get(7));
 
             Rest rest1 = new Rest(3000);
             Rest rest2 = new Rest(3000);
@@ -59,13 +58,18 @@ public class Main {
             wb1.addComponent(rest2);
             wb1.addComponent(wex3);
 
-            Workout testWorkout = new Workout("Short Test Workout");
+            Workout testWorkout = new Workout("Short Synced Test Workout");
 
             testWorkout.addBlock(wb1);
 
             workoutRepository.save(testWorkout);
 
-            System.out.println(workoutRepository.getById(1L));
+
+
+            /*exerciseRepository.deleteExercise(exerciseRepository.getAllExercises().get(1));
+            exerciseRepository.deleteExercise(exerciseRepository.getAllExercises().get(2));
+*/
+
 
 
         };

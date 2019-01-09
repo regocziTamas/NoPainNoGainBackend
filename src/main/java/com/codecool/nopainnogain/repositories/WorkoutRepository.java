@@ -14,6 +14,9 @@ public interface WorkoutRepository extends JpaRepository<Workout,Long> {
     @Transactional
     public Workout getById(Long id);
 
-    @Query("SELECT w FROM Workout w WHERE w.lastUpdated > :timestamp")
-    public List<Workout> getAllUpdatedExercisesSince(@Param("timestamp") Long timestamp);
+    @Query("SELECT w from workout w WHERE w.lastUpdated > :timestamp")
+    public List<Workout> getAllUpdatedWorkoutsSince( @Param("timestamp") Long timestamp);
+
+    @Transactional
+    public void deleteById(Long id);
 }
