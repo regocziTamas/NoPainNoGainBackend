@@ -45,8 +45,8 @@ public class Main {
         return (String... args) -> {
 
             NPNGAdmin admin = new NPNGAdmin();
-            admin.setUsername("iamthebest");
-            admin.setPassword(bCryptPasswordEncoder().encode("gtasamp23"));
+            admin.setUsername("thomaster");
+            admin.setPassword(bCryptPasswordEncoder().encode("gtasamp24"));
             adminRepository.save(admin);
 
 

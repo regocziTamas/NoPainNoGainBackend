@@ -40,10 +40,12 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader(HEADER_STRING);
+        token = token.replace(TOKEN_PREFIX,"");
+
         if (token != null) {
             // parse the token.
             String user = Jwts.parser()
-                    .setSigningKey(SECRET.getBytes())
+                    .setSigningKey(SECRET)
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
