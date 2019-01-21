@@ -4,7 +4,6 @@ package com.codecool.nopainnogain.model;
 
 
 import com.codecool.nopainnogain.converter.WorkoutBlockConverter;
-import com.codecool.nopainnogain.repositories.DeletedObjectType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;

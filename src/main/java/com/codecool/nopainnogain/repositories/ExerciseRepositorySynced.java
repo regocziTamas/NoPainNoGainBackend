@@ -2,10 +2,13 @@ package com.codecool.nopainnogain.repositories;
 
 import com.codecool.nopainnogain.model.DeleteObject;
 import com.codecool.nopainnogain.model.Exercise;
+import com.codecool.nopainnogain.model.ExerciseTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -40,6 +43,8 @@ public class ExerciseRepositorySynced {
     public List<Exercise> getAllExercisesUpdatedSince(Long timestamp){
         return exerciseRepository.getAllUpdatedExercisesSince(timestamp);
     }
+
+
 
 
 

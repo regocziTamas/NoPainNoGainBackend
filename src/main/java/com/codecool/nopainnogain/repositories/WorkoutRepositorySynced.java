@@ -41,4 +41,9 @@ public class WorkoutRepositorySynced{
         return workoutRepository.getAllUpdatedWorkoutsSince(timestamp);
     }
 
+    @Transactional
+    public List<Workout> getAllWorkouts(){
+        return workoutRepository.findAll();
+    }
+
 }
