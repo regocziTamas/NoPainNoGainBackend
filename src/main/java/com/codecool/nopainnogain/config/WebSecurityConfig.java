@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().authorizeRequests()
 
                 .antMatchers("/exercise-updates/**", "/exercise-deletes/**", "/workout-updates/**", "/workout-deletes/**").permitAll()
-                .antMatchers("/admin").authenticated()
+                .antMatchers("/admin", "/workouts/**","/exercises/**").authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
