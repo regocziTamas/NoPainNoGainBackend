@@ -19,7 +19,7 @@ public class WorkoutBlockJsonConverter {
     public static String blockToJson(WorkoutBlock block){
         ObjectNode blockJson = JsonNodeFactory.instance.objectNode();
 
-        blockJson.put("order",block.getOrder());
+        blockJson.put("order",block.getOrderId());
 
         ArrayNode arrayNode = JsonNodeFactory.instance.arrayNode();
 
@@ -56,7 +56,7 @@ public class WorkoutBlockJsonConverter {
             e.printStackTrace();
         }
 
-        resultBlock.setOrder(order);
+        resultBlock.setOrderId(order);
         for(WorkoutComponent comp: wcomponents){
             resultBlock.addComponent(comp);
         }

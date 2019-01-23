@@ -7,16 +7,21 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Entity
 public class WorkoutBlock{
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     private List<WorkoutComponent> components = new ArrayList<>();
-    private int order;
+    private int orderId;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private static ObjectMapper objectMapper = new ObjectMapper().enableDefaultTyping();
 
     public WorkoutBlock(){
@@ -24,7 +29,7 @@ public class WorkoutBlock{
     }
 
     public void addComponent(WorkoutComponent component){
-        component.setOrder(components.size());
+        component.setOrderId(components.size());
         components.add(component);
     }
 
@@ -33,6 +38,17 @@ public class WorkoutBlock{
         return components;
     }
 
+    public void setComponents(List<WorkoutComponent> components) {
+        this.components = components;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
@@ -44,12 +60,12 @@ public class WorkoutBlock{
         return toString;
     }
 
-    public int getOrder() {
-        return order;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrder(int id) {
-        this.order = id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public static String toJsonString(WorkoutBlock block){
@@ -75,7 +91,7 @@ public class WorkoutBlock{
     public void reorderComponents(){
         for(int i = 0; i < getComponents().size(); i++){
             WorkoutComponent component = getComponents().get(i);
-            component.setOrder(i);
+            component.setOrderId(i);
         }
     }
 
@@ -91,17 +107,17 @@ public class WorkoutBlock{
 
     public void swapTwoComponents(int order1, int order2){
         for(WorkoutComponent component: getComponents()){
-            if(component.getOrder() == order1){
-                component.setOrder(order2);
-            }else if(component.getOrder() == order2){
-                component.setOrder(order1);
+            if(component.getOrderId() == order1){
+                component.setOrderId(order2);
+            }else if(component.getOrderId() == order2){
+                component.setOrderId(order1);
             }
         }
     }
 
     public void deleteComponentByOrder(int i){
         for(WorkoutComponent component: components){
-            if(component.getOrder() == i){
+            if(component.getOrderId() == i){
                 components.remove(component);
                 reorderComponents();
             }
@@ -113,7 +129,7 @@ public class WorkoutBlock{
 
         @Override
         public int compare(WorkoutComponent t1, WorkoutComponent t2) {
-            return t1.getOrder() - t2.getOrder();
+            return t1.getOrderId() - t2.getOrderId();
         }
     }
 }

@@ -19,11 +19,11 @@ public class WorkoutComponentJsonConverter {
 
         if(comp instanceof Rest){
             component.put("duration",String.valueOf(((Rest) comp).getDurationInMilis()));
-            component.put("order", comp.getOrder());
+            component.put("order", comp.getOrderId());
         }else if(comp instanceof WorkoutExercise){
             component.put("reps",((WorkoutExercise) comp).getReps());
             component.put("exercise",ExerciseJsonConverter.exerciseToJson(((WorkoutExercise) comp).getExercise()));
-            component.put("order", comp.getOrder());
+            component.put("order", comp.getOrderId());
         }
         return component.toString();
     }
@@ -44,14 +44,14 @@ public class WorkoutComponentJsonConverter {
             int duration = Integer.valueOf((String)map.get("duration"));
 
             resultComp = new Rest(duration);
-            resultComp.setOrder(order);
+            resultComp.setOrderId(order);
         }else{
             int order = (int) map.get("order");
             int reps = (int) map.get("reps");
             Exercise ex = ExerciseJsonConverter.jsonToExercise((String) map.get("exercise"));
 
             resultComp = new WorkoutExercise(reps,ex);
-            resultComp.setOrder(order);
+            resultComp.setOrderId(order);
         }
 
         return resultComp;

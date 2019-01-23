@@ -102,14 +102,14 @@ public class Main {
 
 
 
-            String s1 = new ObjectMapper().writeValueAsString(testWorkout);
-            System.out.println(s1);
+            /*String s1 = new ObjectMapper().writeValueAsString(testWorkout);
+            System.out.println(s1);*/
 
             String s2 = "{\"title\":\"Short Synced Test Workout\",\"blocks\":[{\"components\":[{\"type\":\"WorkoutExercise\",\"order\":0,\"reps\":10,\"exercise\":{\"name\":\"Barbell Curl\",\"description\":\"Stand up with your torso upright while holding a barbell at a shoulder-width grip. The palm of your hands should be facing forward and the elbows should be close to the torso. This will be your starting position.\",\"target\":\"Biceps\",\"id\":2}},{\"type\":\"Rest\",\"order\":1,\"durationInMilis\":3000},{\"type\":\"WorkoutExercise\",\"order\":2,\"reps\":10,\"exercise\":{\"name\":\"Regular Grip Front Lat Pulldown\",\"description\":\"Sit down on a pull-down machine with a wide bar attached to the top pulley. Make sure that you adjust the knee pad of the machine to fit your height. These pads will prevent your body from being raised by the resistance attached to the bar.\",\"target\":\"Back\",\"id\":4}},{\"type\":\"Rest\",\"order\":3,\"durationInMilis\":3000},{\"type\":\"WorkoutExercise\",\"order\":4,\"reps\":10,\"exercise\":{\"name\":\"Seated Calf Raise\",\"description\":\"Place your lower thighs under the lever pad, which will need to be adjusted according to the height of your thighs. Now place your hands on top of the lever pad in order to prevent it from slipping forward.\",\"target\":\"Calves\",\"id\":8}}],\"order\":0}],\"id\":1,\"empty\":false}";
 
-            Workout fuckme = new ObjectMapper().readValue(s2,new TypeReference<Workout>() {} );
+            /*Workout fuckme = new ObjectMapper().readValue(s2,new TypeReference<Workout>() {} );
 
-            System.out.println(fuckme);
+            System.out.println(fuckme);*/
 
             /*exerciseRepository.deleteExercise(exerciseRepository.getAllExercises().get(1));
             exerciseRepository.deleteExercise(exerciseRepository.getAllExercises().get(2));
@@ -123,6 +123,11 @@ public class Main {
             * them when an exercise is changed in a WorkoutExercise. Also implement this on android as well
             * Also handle if a workout contains an exercise that has been deleted. The deleted exercises should
             * default to pushups or something.*/
+
+            Workout workout = workoutRepository.getById(1L);
+
+            String s = new ObjectMapper().writeValueAsString(workout);
+            System.out.println(s);
 
 
 
