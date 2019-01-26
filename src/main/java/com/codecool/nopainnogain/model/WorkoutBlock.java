@@ -22,7 +22,7 @@ public class WorkoutBlock{
     private int orderId;
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private static ObjectMapper objectMapper = new ObjectMapper().enableDefaultTyping();
+    /*private static ObjectMapper objectMapper = new ObjectMapper().enableDefaultTyping();*/
 
     public WorkoutBlock(){
 
@@ -31,6 +31,12 @@ public class WorkoutBlock{
     public void addComponent(WorkoutComponent component){
         component.setOrderId(components.size());
         components.add(component);
+    }
+
+    public void prepareForJSON(){
+        ArrayList arr = new ArrayList();
+        arr.addAll(components);
+        components = arr;
     }
 
     public List<WorkoutComponent> getComponents(){
@@ -68,7 +74,7 @@ public class WorkoutBlock{
         this.orderId = orderId;
     }
 
-    public static String toJsonString(WorkoutBlock block){
+    /*public static String toJsonString(WorkoutBlock block){
         String string = null;
         try {
             string = objectMapper.writeValueAsString(block);
@@ -86,7 +92,7 @@ public class WorkoutBlock{
             e.printStackTrace();
         }
         return block;
-    }
+    }*/
 
     public void reorderComponents(){
         for(int i = 0; i < getComponents().size(); i++){

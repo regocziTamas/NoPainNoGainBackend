@@ -57,6 +57,16 @@ public class Workout{
         blocks.add(block);
     }
 
+    public void prepareForJSON(){
+        ArrayList arr = new ArrayList();
+        arr.addAll(blocks);
+        blocks = arr;
+
+        for(WorkoutBlock b: blocks){
+            b.prepareForJSON();
+        }
+    }
+
     @JsonIgnore
     public List<WorkoutBlock> getBlocksForListing(){
         Collections.sort(blocks, new WorkoutBlockComparator());

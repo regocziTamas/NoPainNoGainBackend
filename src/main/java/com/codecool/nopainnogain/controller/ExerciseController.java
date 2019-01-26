@@ -77,6 +77,7 @@ public class ExerciseController {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+        System.out.println(result);
 
         return result;
     }
