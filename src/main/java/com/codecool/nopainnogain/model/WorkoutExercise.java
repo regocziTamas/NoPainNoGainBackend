@@ -1,14 +1,24 @@
 package com.codecool.nopainnogain.model;
 
 
+import javax.persistence.*;
 
-
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class WorkoutExercise extends WorkoutComponent{
 
     int reps;
+    @OneToOne
     Exercise exercise;
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public WorkoutExercise(int reps, Exercise exercise) {
         this.reps = reps;

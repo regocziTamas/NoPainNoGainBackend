@@ -34,14 +34,16 @@ public class WorkoutController {
     public String getAllWorkoutUpdatedSince(@PathVariable("timestamp") Long timestamp){
         String result = "";
         objectMapper.enableDefaultTyping();
+        List<Workout> workouts = workoutRepository.getAllUpdatedWorkoutSince(timestamp);
 
         try {
             result = objectMapper.writerFor(new TypeReference<List<Workout>>() { })
-                    .writeValueAsString(workoutRepository.getAllUpdatedWorkoutSince(timestamp));
-
+                    .writeValueAsString(workouts);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+
+        result = result.replace("org.hibernate.collection.internal.PersistentBag", "java.util.ArrayList");
         return result;
     }
 

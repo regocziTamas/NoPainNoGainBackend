@@ -22,8 +22,9 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Workout{
     private String title;
-    @Lob
-    @Convert(converter = WorkoutBlockConverter.class)
+    /*@Lob
+    @Convert(converter = WorkoutBlockConverter.class)*/
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     private List<WorkoutBlock> blocks = new ArrayList<>();
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -52,8 +53,18 @@ public class Workout{
     }
 
     public void addBlock(WorkoutBlock block){
-        block.setOrder(blocks.size());
+        block.setOrderId(blocks.size());
         blocks.add(block);
+    }
+
+    public void prepareForJSON(){
+        ArrayList arr = new ArrayList();
+        arr.addAll(blocks);
+        blocks = arr;
+
+        for(WorkoutBlock b: blocks){
+            b.prepareForJSON();
+        }
     }
 
     @JsonIgnore
@@ -88,8 +99,8 @@ public class Workout{
     }
 
     public void swapBlocks(int order1, int order2){
-        blocks.get(order1).setOrder(order2);
-        blocks.get(order2).setOrder(order1);
+        blocks.get(order1).setOrderId(order2);
+        blocks.get(order2).setOrderId(order1);
     }
 
     public List<WorkoutBlock> getBlocks() {
@@ -146,7 +157,7 @@ public class Workout{
 
     public void replaceBlockById(int id, WorkoutBlock newBlock){
         for(int i = 0; i < blocks.size(); i++){
-            if(blocks.get(i).getOrder() == id){
+            if(blocks.get(i).getOrderId() == id){
                 blocks.set(i,newBlock);
             }
         }
@@ -158,7 +169,7 @@ public class Workout{
 
         @Override
         public int compare(WorkoutBlock block, WorkoutBlock t1) {
-            return block.getOrder() - t1.getOrder();
+            return block.getOrderId() - t1.getOrderId();
         }
 
         @Override
